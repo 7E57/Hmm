@@ -18,7 +18,7 @@ Tab:AddButton({
 	Name = "Click Me",
 	Callback = function()
 		for i,kill in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-			for i = 1,20 do
+			for i = 1,30 do
 				game:GetService("ReplicatedStorage").Events.Damage:FireServer(kill, 50)
 			end
 		end
@@ -43,7 +43,7 @@ Tab:AddToggle({
 				end
 				wait(1)
 				for i,kill in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-					for i = 1,20 do
+					for i = 1,30 do
 						game:GetService("ReplicatedStorage").Events.Damage:FireServer(kill, 50)
 					end
 				end
