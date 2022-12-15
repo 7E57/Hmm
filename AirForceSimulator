@@ -12,7 +12,7 @@ local Section = Tab:AddSection({
 	Name = "Welp.. This game is boring now"
 })
 
-Tab:AddParagraph("NOTICE:","You must first be in a mission. Run 'Click Me' first then once you see 'Select Mission' and 'Return To Hangar' run the auto farm.")
+Tab:AddParagraph("NOTICE:","BUGGY FOR RIGHT NOW! You must first be in a mission. Run 'Click Me' first then once you see 'Select Mission' and 'Return To Hangar' run the auto farm.")
 
 Tab:AddButton({
 	Name = "Click Me",
