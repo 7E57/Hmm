@@ -1,6 +1,147 @@
--- Use default jet
-for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-	for i = 1,16 do
-		game:GetService("ReplicatedStorage").Events.Damage:FireServer(v, 50)
-	end
-end
+local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
+local Window = OrionLib:MakeWindow({Name = "Air Force Simulator GUI", HidePremium = false, SaveConfig = true, ConfigFolder = "HorseValley_GUI"})
+
+--[[ Main Tab | START ]]--
+local Tab = Window:MakeTab({
+	Name = "Main",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+local Section = Tab:AddSection({
+	Name = "Welp.. This game is boring now"
+})
+
+Tab:AddParagraph("NOTICE:","You must first be in a mission. Run 'Click Me' first then once you see 'Select Mission' and 'Return To Hangar' run the auto farm.")
+
+Tab:AddButton({
+	Name = "Click Me",
+	Callback = function()
+		for i,kill in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+			for i = 1,20 do
+				game:GetService("ReplicatedStorage").Events.Damage:FireServer(kill, 50)
+			end
+		end
+	end   
+})
+
+Tab:AddToggle({
+	Name = "Auto Win Missions | Auto Farm Cash + EXP",
+	Default = false,
+	Callback = function(oops)
+		if oops == true then
+			_G.cool = true
+			while _G.cool == true do
+		        local Mission = game.Players.LocalPlayer.PlayerGui.Missions.Post.Missions
+				for i,mission in pairs(getconnections(Mission.MouseButton1Click)) do
+					mission:Fire()
+				end
+				wait(0.5)
+				local Round = game.Players.LocalPlayer.PlayerGui.Missions.Selection.Main:GetChildren()[7].Accept
+				for i,round in pairs(getconnections(Round.MouseButton1Click)) do
+					round:Fire()
+				end
+				wait(1)
+				for i,kill in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+					for i = 1,20 do
+						game:GetService("ReplicatedStorage").Events.Damage:FireServer(kill, 50)
+					end
+				end
+				wait(8)
+			end
+		else
+		    _G.cool = false
+		end
+	end    
+})
+--[[ Main Tab | END ]]--
+
+--[[ World Tab | START ]]--
+local Tab = Window:MakeTab({
+	Name = "World",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+local Section = Tab:AddSection({
+	Name = "Gravitational Pull"
+})
+
+Tab:AddSlider({
+	Name = "Gravity",
+	Min = 0,
+	Max = 1000,
+	Default = workspace.Gravity,
+	Color = Color3.fromRGB(255,255,255),
+	Increment = 10,
+	ValueName = "Power",
+	Callback = function(grav)
+		workspace.Gravity = grav
+	end    
+})
+
+Tab:AddSlider({
+	Name = "FieldOfView",
+	Min = 0,
+	Max = 170,
+	Default = workspace.Camera.DiagonalFieldOfView,
+	Color = Color3.fromRGB(255,255,255),
+	Increment = 5,
+	ValueName = "View Angle",
+	Callback = function(view)
+		workspace.Camera.DiagonalFieldOfView = view
+	end    
+})
+--[[ World Tab | END ]]--
+
+--[[ Player Tab | START ]]--
+local Tab = Window:MakeTab({
+	Name = "Player",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+local Section = Tab:AddSection({
+	Name = "Movement"
+})
+
+Tab:AddSlider({
+	Name = "WalkSpeed",
+	Min = 0,
+	Max = 100,
+	Default = game.Players.LocalPlayer.Character.Humanoid.WalkSpeed,
+	Color = Color3.fromRGB(255,255,255),
+	Increment = 4,
+	ValueName = "Speed",
+	Callback = function(walk)
+		game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = walk
+	end    
+})
+
+Tab:AddSlider({
+	Name = "JumpHeight",
+	Min = 0,
+	Max = 500,
+	Default = game.Players.LocalPlayer.Character.Humanoid.JumpPower,
+	Color = Color3.fromRGB(255,255,255),
+	Increment = 4,
+	ValueName = "Height",
+	Callback = function(jump)
+		game.Players.LocalPlayer.Character.Humanoid.JumpHeight = jump
+	end    
+})
+
+Tab:AddButton({
+	Name = "Anti Idle",
+	Callback = function()
+		local vUser = game:GetService("VirtualUser")
+		game:GetService("Players").LocalPlayer.Idled:connect(function()
+			vUser:Button2Down(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+			wait(1)
+			vUser:Button2Up(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+		end)
+	end   
+})
+--[[ Player Tab | END ]]--
+
+OrionLib:Init()
