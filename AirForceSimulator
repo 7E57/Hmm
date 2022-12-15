@@ -12,14 +12,33 @@ local Section = Tab:AddSection({
 	Name = "Welp.. This game is boring now"
 })
 
-Tab:AddParagraph("NOTICE:","BUGGY FOR RIGHT NOW! You must first be in a mission. Run 'Click Me' first then once you see 'Select Mission' and 'Return To Hangar' run the auto farm.")
+Tab:AddParagraph("NOTICE:","BUGGY FOR RIGHT NOW! USE THE FIRST PLANE! You must first be in a mission. Run 'Click Me' first then once you see 'Select Mission' and 'Return To Hangar' run the auto farm. If Auto Farm breaks run 'Click Me' to fix")
 
 Tab:AddButton({
 	Name = "Click Me",
 	Callback = function()
-		for i,kill in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-			for i = 1,30 do
-				game:GetService("ReplicatedStorage").Events.Damage:FireServer(kill, 50)
+		local part = game:GetService("Players").iSmellTampxns.PlayerGui.Missions.Post
+		if part.Visible == true then
+			local Mission = game.Players.LocalPlayer.PlayerGui.Missions.Post.Missions
+			for i,mission in pairs(getconnections(Mission.MouseButton1Click)) do
+				mission:Fire()
+			end
+			wait(0.5)
+			local Round = game.Players.LocalPlayer.PlayerGui.Missions.Selection.Main:GetChildren()[7].Accept
+			for i,round in pairs(getconnections(Round.MouseButton1Click)) do
+				round:Fire()
+			end
+			wait(5)
+			for i,kill in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+				for i = 1,50 do
+					game:GetService("ReplicatedStorage").Events.Damage:FireServer(kill, 50)
+				end
+			end
+		else
+			for i,kill in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+				for i = 1,50 do
+					game:GetService("ReplicatedStorage").Events.Damage:FireServer(kill, 50)
+				end
 			end
 		end
 	end   
@@ -31,8 +50,8 @@ Tab:AddToggle({
 	Callback = function(oops)
 		if oops == true then
 			_G.cool = true
-			while _G.cool == true do
-		        local Mission = game.Players.LocalPlayer.PlayerGui.Missions.Post.Missions
+			while _G.cool == true do wait()
+				local Mission = game.Players.LocalPlayer.PlayerGui.Missions.Post.Missions
 				for i,mission in pairs(getconnections(Mission.MouseButton1Click)) do
 					mission:Fire()
 				end
@@ -41,13 +60,13 @@ Tab:AddToggle({
 				for i,round in pairs(getconnections(Round.MouseButton1Click)) do
 					round:Fire()
 				end
-				wait(1)
+				wait(5)
 				for i,kill in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-					for i = 1,30 do
+					for i = 1,75 do
 						game:GetService("ReplicatedStorage").Events.Damage:FireServer(kill, 50)
 					end
 				end
-				wait(8)
+				wait(10)
 			end
 		else
 		    _G.cool = false
