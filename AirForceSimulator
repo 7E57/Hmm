@@ -1,0 +1,4 @@
+-- Simple AF..
+for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+	game:GetService("ReplicatedStorage").Events.Damage:FireServer(v, 50)
+end
