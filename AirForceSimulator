@@ -1,4 +1,6 @@
--- Simple AF..
+-- Use default jet
 for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-	game:GetService("ReplicatedStorage").Events.Damage:FireServer(v, 50)
+	for i = 1,16 do
+		game:GetService("ReplicatedStorage").Events.Damage:FireServer(v, 50)
+	end
 end
