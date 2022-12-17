@@ -1,0 +1,31 @@
+local Players = game:GetService("Players")
+
+function onPlayerAdded(player)
+  local character = player.Character
+  if character then
+    local head = character:WaitForChild("Head")
+    local billboard = Instance.new("BillboardGui")
+    billboard.Parent = character.Head
+    billboard.Adornee = character.Head
+    billboard.Size = UDim2.new(3, 0, 3, 0)
+    billboard.StudsOffset = Vector3.new(0, 2, 0)
+    
+    local label = Instance.new("TextLabel")
+    label.Parent = billboard
+    label.Text = player.Name
+    label.Size = UDim2.new(1, 0, 1, 0)
+    label.TextSize = 16
+    label.TextColor3 = Color3.new(1, 1, 1)
+    label.TextStrokeColor3 = Color3.new(0, 0, 0)
+    label.TextStrokeTransparency = 0.5
+    label.BackgroundTransparency = 1
+  end
+end
+
+-- Display nametags for all existing players
+for _, player in pairs(Players:GetPlayers()) do
+  onPlayerAdded(player)
+end
+
+-- Display nametags for players who join the game in the future
+Players.PlayerAdded:Connect(onPlayerAdded)
