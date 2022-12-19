@@ -1,0 +1,5 @@
+while task.wait() do
+    game.ReplicatedStorage.RemoteEvents.Drink:FireServer() wait()
+    game.ReplicatedStorage.RemoteEvents.ManageCrying:FireServer(true) wait()
+    game.ReplicatedStorage.RemoteEvents.AutoStats:FireServer()
+end
