@@ -1,0 +1,51 @@
+wait(2.69420)
+
+local HelpingHand = Instance.new("ScreenGui")
+local Frame = Instance.new("Frame")
+local TextButton = Instance.new("TextButton")
+
+game:GetService("CoreGui").synv3.mainframe.line:Remove()
+game:GetService("CoreGui").synv3.mainframe.version:Remove()
+game:GetService("CoreGui").synv3.mainframe.new_tab:Remove()
+game:GetService("CoreGui").synv3.mainframe.settings:Remove()
+game:GetService("CoreGui").synv3.mainframe.top_frame:Remove()
+game:GetService("CoreGui").synv3.mainframe.logo["logo-x"]:Remove()
+game:GetService("CoreGui").synv3.mainframe.btm_frame.open_btn:Remove()
+game:GetService("CoreGui").synv3.mainframe.btm_frame.open_btn:Remove()
+game:GetService("CoreGui").synv3.mainframe.btm_frame.execfile_btn:Remove()
+
+game:GetService("CoreGui").synv3.mainframe.btm_frame.exe_btn.Position = UDim2.new(0.695,0,0.201,0)
+game:GetService("CoreGui").synv3.mainframe.btm_frame.clr_btn.Position = UDim2.new(0.860,0,0.201,0)
+
+HelpingHand.Name = "HelpingHand"
+HelpingHand.Parent = game:WaitForChild("CoreGui")
+HelpingHand.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+Frame.Parent = HelpingHand
+Frame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Frame.BackgroundTransparency = 1.000
+Frame.Position = UDim2.new(0, 0, 0.970000029, 0)
+Frame.Size = UDim2.new(0, 50, 0, 25)
+
+TextButton.Parent = Frame
+TextButton.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+TextButton.BorderSizePixel = 0
+TextButton.Size = UDim2.new(0, 50, 0, 25)
+TextButton.Style = Enum.ButtonStyle.RobloxRoundButton
+TextButton.Font = Enum.Font.SciFi
+TextButton.Text = "Show"
+TextButton.TextColor3 = Color3.fromRGB(0, 0, 0)
+TextButton.TextSize = 11.000
+TextButton.TextWrapped = true
+
+game:GetService("CoreGui").synv3.mainframe.min.MouseButton1Click:Connect(function()
+	game:GetService("CoreGui").HelpingHand.Enabled = true
+	game:GetService("CoreGui").synv3.Enabled = not game:GetService("CoreGui").synv3.Enabled
+end)
+
+TextButton.MouseButton1Click:Connect(function()
+	game:GetService("CoreGui").synv3.Enabled = true
+	game:GetService("CoreGui").HelpingHand.Enabled = not game:GetService("CoreGui").HelpingHand.Enabled
+end)
+
+game:GetService("CoreGui").HelpingHand.Enabled = false
