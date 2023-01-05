@@ -1,0 +1,174 @@
+local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
+local Window = OrionLib:MakeWindow({Name = "Bakery Simulator GUI", HidePremium = false, SaveConfig = true, ConfigFolder = "Bakery_GUI"})
+
+--[[ Main Tab | START ]]--
+local Tab = Window:MakeTab({
+	Name = "Main",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+local Section = Tab:AddSection({
+	Name = "One Time Run"
+})
+
+Tab:AddButton({
+	Name = "Artificial Insemination",
+	Callback = function()
+		for i,v in pairs(workspace.Plots:GetChildren()) do
+			if v.Sign.OwnerName.TextLabel.Text == game.Players.LocalPlayer.DisplayName.."'s Bakery" then
+				for i,oven in pairs(v.Ovens:GetChildren()) do
+					game.ReplicatedStorage.Remotes.StartBake:FireServer(oven,"Exotic")
+				end
+			end
+		end
+	end   
+})
+
+Tab:AddButton({
+	Name = "Grab from Ovens",
+	Callback = function()
+		for i,v in pairs(workspace.Plots:GetChildren()) do
+			if v.Sign.OwnerName.TextLabel.Text == game.Players.LocalPlayer.DisplayName.."'s Bakery" then
+				for i,pickup in pairs(v.Ovens:GetChildren()) do
+					pickup.ConverterData.__REMOTE:FireServer()
+				end
+			end
+		end
+	end   
+})
+
+local Section = Tab:AddSection({
+	Name = "Auto Run"
+})
+
+Tab:AddToggle({
+	Name = "Ghost Customers",
+	Default = false,
+	Callback = function(oops)
+		if oops == true then
+			_G.cool = true
+			while _G.cool == true do
+		        wait(1.5)
+				for i,v in pairs(workspace.Plots:GetChildren()) do
+					if v.Sign.OwnerName.TextLabel.Text == game.Players.LocalPlayer.DisplayName.."'s Bakery" then
+						for i,customer in pairs(v.Shelf.Products:GetChildren()) do
+							game:GetService("ReplicatedStorage").Remotes.CustomerPurchase:FireServer(customer)
+						end
+					end
+				end
+			end
+		else
+		    _G.cool = false
+		end
+	end    
+})
+
+Tab:AddToggle({
+	Name = "Fill Shopping Cart",
+	Default = false,
+	Callback = function(fet)
+		if fet == true then
+			_G.et = true
+			while _G.et == true do
+		        wait(1.5)
+				for i,v in pairs(workspace.Ingredients:GetChildren()) do
+					game.ReplicatedStorage.Remotes.TI_0:FireServer(v.Ingredient_Collider)
+				end
+			end
+		else
+		    _G.et = false
+		end
+	end    
+})
+--[[ Main Tab | END ]]--
+
+--[[ World Tab | START ]]--
+local Tab = Window:MakeTab({
+	Name = "World",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+local Section = Tab:AddSection({
+	Name = "Gravitational Pull"
+})
+
+Tab:AddSlider({
+	Name = "Gravity",
+	Min = 0,
+	Max = 1000,
+	Default = workspace.Gravity,
+	Color = Color3.fromRGB(255,255,255),
+	Increment = 10,
+	ValueName = "Power",
+	Callback = function(grav)
+		workspace.Gravity = grav
+	end    
+})
+
+Tab:AddSlider({
+	Name = "FieldOfView",
+	Min = 0,
+	Max = 170,
+	Default = workspace.Camera.DiagonalFieldOfView,
+	Color = Color3.fromRGB(255,255,255),
+	Increment = 5,
+	ValueName = "View Angle",
+	Callback = function(view)
+		workspace.Camera.DiagonalFieldOfView = view
+	end    
+})
+--[[ World Tab | END ]]--
+
+--[[ Player Tab | START ]]--
+local Tab = Window:MakeTab({
+	Name = "Player",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+local Section = Tab:AddSection({
+	Name = "Movement"
+})
+
+Tab:AddSlider({
+	Name = "WalkSpeed",
+	Min = 0,
+	Max = 100,
+	Default = game.Players.LocalPlayer.Character.Humanoid.WalkSpeed,
+	Color = Color3.fromRGB(255,255,255),
+	Increment = 4,
+	ValueName = "Speed",
+	Callback = function(walk)
+		game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = walk
+	end    
+})
+
+Tab:AddSlider({
+	Name = "JumpHeight",
+	Min = 0,
+	Max = 500,
+	Default = game.Players.LocalPlayer.Character.Humanoid.JumpPower,
+	Color = Color3.fromRGB(255,255,255),
+	Increment = 4,
+	ValueName = "Height",
+	Callback = function(jump)
+		game.Players.LocalPlayer.Character.Humanoid.JumpHeight = jump
+	end    
+})
+
+Tab:AddButton({
+	Name = "Anti Idle",
+	Callback = function()
+		local vUser = game:GetService("VirtualUser")
+		game:GetService("Players").LocalPlayer.Idled:connect(function()
+			vUser:Button2Down(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+			wait(1)
+			vUser:Button2Up(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+		end)
+	end   
+})
+--[[ Player Tab | END ]]--
+
+OrionLib:Init()
