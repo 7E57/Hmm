@@ -1,0 +1,143 @@
+local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
+local Window = OrionLib:MakeWindow({Name = "Kill Monsters to Save Princess GUI", HidePremium = false, SaveConfig = true, ConfigFolder = "Princess_GUI"})
+
+--[[ Main Tab | START ]]--
+local Tab = Window:MakeTab({
+	Name = "Main",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+local Section = Tab:AddSection({
+	Name = "OnlyFans is lame | JackOff to this"
+})
+
+Tab:AddToggle({
+	Name = "Auto Kill | FakeTaxi",
+	Default = false,
+	Callback = function(oops)
+		if oops == true then
+			_G.cool = true
+			while _G.cool do task.wait(1.5)
+		        local Hit = game.ReplicatedStorage.Remote.Weapon.TakeDamage
+				local Kill = workspace.Waves:GetDescendants()
+				for i,v in pairs(Kill) do
+					if v:FindFirstChild("Head") then
+						Hit:FireServer(v.Head)
+					end
+				end
+			end
+		else
+		    _G.cool = false
+		end
+	end    
+})
+
+Tab:AddToggle({
+	Name = "EXP Farm | PornHub Premium",
+	Default = false,
+	Callback = function(fet)
+		if fet == true then
+			_G.et = true
+			while _G.et do task.wait()
+		        local Hit = game.ReplicatedStorage.Remote.Weapon.TakeDamage
+				Hit:FireServer(workspace.World["1"].Func.Training:GetChildren()[1].HitBox)
+				Hit:FireServer(workspace.World["1"].Func.Training:GetChildren()[2].HitBox)
+				Hit:FireServer(workspace.World["1"].Func.Training:GetChildren()[3].HitBox)
+			end
+		else
+		    _G.et = false
+		end
+	end    
+})
+--[[ Main Tab | END ]]--
+
+--[[ World Tab | START ]]--
+local Tab = Window:MakeTab({
+	Name = "World",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+local Section = Tab:AddSection({
+	Name = "Gravitational Pull"
+})
+
+Tab:AddSlider({
+	Name = "Gravity",
+	Min = 0,
+	Max = 1000,
+	Default = workspace.Gravity,
+	Color = Color3.fromRGB(255,255,255),
+	Increment = 10,
+	ValueName = "Power",
+	Callback = function(grav)
+		workspace.Gravity = grav
+	end    
+})
+
+Tab:AddSlider({
+	Name = "FieldOfView",
+	Min = 0,
+	Max = 170,
+	Default = workspace.Camera.DiagonalFieldOfView,
+	Color = Color3.fromRGB(255,255,255),
+	Increment = 5,
+	ValueName = "View Angle",
+	Callback = function(view)
+		workspace.Camera.DiagonalFieldOfView = view
+	end    
+})
+--[[ World Tab | END ]]--
+
+--[[ Player Tab | START ]]--
+local Tab = Window:MakeTab({
+	Name = "Player",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+local Section = Tab:AddSection({
+	Name = "Movement"
+})
+
+Tab:AddSlider({
+	Name = "WalkSpeed",
+	Min = 0,
+	Max = 100,
+	Default = game.Players.LocalPlayer.Character.Humanoid.WalkSpeed,
+	Color = Color3.fromRGB(255,255,255),
+	Increment = 4,
+	ValueName = "Speed",
+	Callback = function(walk)
+		game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = walk
+	end    
+})
+
+Tab:AddSlider({
+	Name = "JumpHeight",
+	Min = 0,
+	Max = 500,
+	Default = game.Players.LocalPlayer.Character.Humanoid.JumpPower,
+	Color = Color3.fromRGB(255,255,255),
+	Increment = 4,
+	ValueName = "Height",
+	Callback = function(jump)
+		game.Players.LocalPlayer.Character.Humanoid.JumpHeight = jump
+	end    
+})
+
+Tab:AddButton({
+	Name = "Anti Idle",
+	Callback = function()
+		local vUser = game:GetService("VirtualUser")
+		game:GetService("Players").LocalPlayer.Idled:connect(function()
+			vUser:Button2Down(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+			wait(1)
+			vUser:Button2Up(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+		end)
+	end   
+})
+--[[ Player Tab | END ]]--
+
+OrionLib:Init()
