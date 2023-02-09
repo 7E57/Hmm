@@ -8,17 +8,38 @@ local Tab = Window:MakeTab({
 	PremiumOnly = false
 })
 
-local Section = Tab:AddSection({
-	Name = "OnlyFans is lame | JackOff to this"
+Tab:AddParagraph("NOTICE:","You must re-enable all 3 each time you die.")
+
+Tab:AddButton({
+	Name = "Always Healing | Brazzers",
+	Callback = function()
+		game.ReplicatedStorage.Remote.Princess.PrincessEquip:FireServer(1003)
+		game.ReplicatedStorage.Remote.Princess.PrincessHug:FireServer(true)
+	end   
+})
+
+Tab:AddButton({
+	Name = "Skip to Wave 60 | YouPorn",
+	Callback = function()
+		game.ReplicatedStorage.Remote.Princess.PrincessEquip:FireServer(1006)
+		game.ReplicatedStorage.Remote.Princess.PrincessHug:FireServer(true)
+	end   
+})
+
+Tab:AddButton({
+	Name = "Attack Speed | RedTube",
+	Callback = function()
+		game.ReplicatedStorage.Remote.Princess.PrincessEquip:FireServer(1002)
+	end   
 })
 
 Tab:AddToggle({
-	Name = "Auto Kill | FakeTaxi",
+	Name = "Auto Kill | OnlyFans",
 	Default = false,
 	Callback = function(oops)
 		if oops == true then
 			_G.cool = true
-			while _G.cool do task.wait()
+			while _G.cool do task.wait(0.1)
 		        local Hit = game.ReplicatedStorage.Remote.Weapon.TakeDamage
 				local Kill = workspace.Waves:GetDescendants()
 				for i,v in pairs(Kill) do
@@ -34,7 +55,7 @@ Tab:AddToggle({
 })
 
 Tab:AddToggle({
-	Name = "EXP Farm | PornHub Premium",
+	Name = "EXP Farm | PornHub",
 	Default = false,
 	Callback = function(fet)
 		if fet == true then
