@@ -18,7 +18,7 @@ Tab:AddToggle({
 	Callback = function(oops)
 		if oops == true then
 			_G.cool = true
-			while _G.cool do task.wait(1.5)
+			while _G.cool do task.wait()
 		        local Hit = game.ReplicatedStorage.Remote.Weapon.TakeDamage
 				local Kill = workspace.Waves:GetDescendants()
 				for i,v in pairs(Kill) do
