@@ -1,0 +1,124 @@
+local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
+local Window = OrionLib:MakeWindow({Name = "Windows 10 OS [Operating System] [END-GAME]", HidePremium = false, SaveConfig = true, ConfigFolder = "wTen"})
+
+--[[ Main Tab | START ]]--
+local Tab = Window:MakeTab({
+	Name = "Main",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+local Section = Tab:AddSection({
+	Name = "Free Badges.."
+})
+
+Tab:AddParagraph("NOTICE:","To get the Social Badge: Create a free VIP Server and join it. DONE.")
+
+Tab:AddButton({
+	Name = "Auto Win .. Entire Game",
+	Callback = function()
+	    game:GetService("ReplicatedStorage").instaszled59328AMogUS02:FireServer()
+	    game:GetService("ReplicatedStorage").kalkulaejszynexploitersWAT:FireServer()
+	    game:GetService("ReplicatedStorage").tylemaEGpopula4929498:FireServer()    
+	    game:GetService("ReplicatedStorage").herkonifikejszyn409:FireServer()
+	    game:GetService("ReplicatedStorage").konkuterszpecial294125:FireServer()
+	    game:GetService("ReplicatedStorage").DESTROJEDkonkuter245:FireServer()
+	    game:GetService("ReplicatedStorage").spDIdRANanyprecent634261:FireServer()
+	    game:GetService("ReplicatedStorage").mjuzikbejker2135u90uior:FireServer()
+	    game:GetService("ReplicatedStorage").vajrusreal978442743:FireServer()
+	    game:GetService("ReplicatedStorage").remoVEdnoESKEjP93982:FireServer()
+	    game:GetService("ReplicatedStorage").wannaKRYremovedEZ059w:FireServer()
+    --Social: game:GetService("ReplicatedStorage").personifikejszyn409:FireServer() 
+	end   
+})
+--[[ Main Tab | END ]]--
+
+--[[ World Tab | START ]]--
+local Tab = Window:MakeTab({
+	Name = "World",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+local Section = Tab:AddSection({
+	Name = "Gravitational Pull"
+})
+
+Tab:AddSlider({
+	Name = "Gravity",
+	Min = 0,
+	Max = 1000,
+	Default = workspace.Gravity,
+	Color = Color3.fromRGB(255,255,255),
+	Increment = 10,
+	ValueName = "Power",
+	Callback = function(grav)
+		workspace.Gravity = grav
+	end    
+})
+
+Tab:AddSlider({
+	Name = "FieldOfView",
+	Min = 0,
+	Max = 170,
+	Default = workspace.Camera.DiagonalFieldOfView,
+	Color = Color3.fromRGB(255,255,255),
+	Increment = 5,
+	ValueName = "View Angle",
+	Callback = function(view)
+		workspace.Camera.DiagonalFieldOfView = view
+	end    
+})
+--[[ World Tab | END ]]--
+
+--[[ Player Tab | START ]]--
+local Tab = Window:MakeTab({
+	Name = "Player",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+local Section = Tab:AddSection({
+	Name = "Movement"
+})
+
+Tab:AddSlider({
+	Name = "WalkSpeed",
+	Min = 0,
+	Max = 100,
+	Default = game.Players.LocalPlayer.Character.Humanoid.WalkSpeed,
+	Color = Color3.fromRGB(255,255,255),
+	Increment = 4,
+	ValueName = "Speed",
+	Callback = function(walk)
+		game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = walk
+	end    
+})
+
+Tab:AddSlider({
+	Name = "JumpHeight",
+	Min = 0,
+	Max = 500,
+	Default = game.Players.LocalPlayer.Character.Humanoid.JumpPower,
+	Color = Color3.fromRGB(255,255,255),
+	Increment = 4,
+	ValueName = "Height",
+	Callback = function(jump)
+		game.Players.LocalPlayer.Character.Humanoid.JumpHeight = jump
+	end    
+})
+
+Tab:AddButton({
+	Name = "Anti Idle",
+	Callback = function()
+		local vUser = game:GetService("VirtualUser")
+		game:GetService("Players").LocalPlayer.Idled:connect(function()
+			vUser:Button2Down(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+			wait(1)
+			vUser:Button2Up(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+		end)
+	end   
+})
+--[[ Player Tab | END ]]--
+
+OrionLib:Init()
