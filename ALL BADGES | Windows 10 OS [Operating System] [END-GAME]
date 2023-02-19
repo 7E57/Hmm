@@ -17,23 +17,12 @@ Tab:AddParagraph("NOTICE:","To get the Social Badge: Create a free VIP Server an
 Tab:AddButton({
 	Name = "Auto Win .. Entire Game",
 	Callback = function()
-	    game:GetService("ReplicatedStorage").instaszled59328AMogUS02:FireServer()
-	    game:GetService("ReplicatedStorage").kalkulaejszynexploitersWAT:FireServer()
-	    game:GetService("ReplicatedStorage").tylemaEGpopula4929498:FireServer()    
-	    game:GetService("ReplicatedStorage").herkonifikejszyn409:FireServer()
-	    game:GetService("ReplicatedStorage").konkuterszpecial294125:FireServer()
-	    game:GetService("ReplicatedStorage").DESTROJEDkonkuter245:FireServer()
-	    game:GetService("ReplicatedStorage").spDIdRANanyprecent634261:FireServer()
-	    game:GetService("ReplicatedStorage").mjuzikbejker2135u90uior:FireServer()
-	    game:GetService("ReplicatedStorage").vajrusreal978442743:FireServer()
-	    game:GetService("ReplicatedStorage").remoVEdnoESKEjP93982:FireServer()
-	    game:GetService("ReplicatedStorage").wannaKRYremovedEZ059w:FireServer()
-	    game:GetService("ReplicatedStorage").anderDEminimaliksafsd43:FireServer()
-	    game:GetService("ReplicatedStorage").hKONESwAtUwannT5423i5owerjk:FireServer()
-	    game:GetService("ReplicatedStorage").hKONESwAtUwannT5423i5owerjk:FireServer()
-	    game:GetService("ReplicatedStorage").realAsTiSAT32552893wersd:FireServer()
-    --Social: game:GetService("ReplicatedStorage").personifikejszyn409:FireServer() 
-	end   
+	    for i,v in pairs(game:GetService("ReplicatedStorage"):GetDescendants()) do
+	        if v:IsA("RemoteEvent") then
+	            v:FireServer()
+            	end
+	    end
+    	end
 })
 --[[ Main Tab | END ]]--
 
