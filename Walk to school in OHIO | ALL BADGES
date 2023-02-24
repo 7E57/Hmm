@@ -2,6 +2,6 @@ local User = game.Players.LocalPlayer
 for i,v in pairs(workspace:GetChildren()) do
   if v.Name == "badge part" then
     v.Position = User.Character.HumanoidRootPart.Position
-	end task.wait()
-	User.PlayerGui.BossFightMainHandler.Events.BadgeRec:FireServer()
+  end task.wait()
+    User.PlayerGui.BossFightMainHandler.Events.BadgeRec:FireServer()
 end
