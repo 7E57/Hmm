@@ -9,7 +9,20 @@ local Tab = Window:MakeTab({
 })
 
 Tab:AddToggle({
-	Name = "Auto Ping",
+	Name = "Auto Ping - Test Signal",
+	Default = false,
+	Callback = function(Value)
+		autoClicker = Value
+		task.spawn(function()
+			while autoClicker do task.wait()
+				game.ReplicatedStorage.ZiNoy.Apps.TestSignal:FireServer(workspace.PLOTS.Plot3, "Test Signal")
+		    end
+		end)
+	end
+})
+
+Tab:AddToggle({
+	Name = "Auto Ping - Ping 2.0",
 	Default = false,
 	Callback = function(Value)
 		autoClicker = Value
