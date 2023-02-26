@@ -1,0 +1,127 @@
+local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
+local Window = OrionLib:MakeWindow({Name = "Raise a Yippee", HidePremium = false, SaveConfig = true, ConfigFolder = "yippee"})
+
+--[[ Main Tab | START ]]--
+local Tab = Window:MakeTab({
+	Name = "Main",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+Tab:AddToggle({
+	Name = "One Punch Man",
+	Default = false,
+	Callback = function(Value)
+		autoClicker = Value
+		task.spawn(function()
+			while autoClicker do task.wait()
+				game.ReplicatedStorage.Skills.CombatFolder.RemoteEvent:FireServer("Left")
+				game.ReplicatedStorage.Skills.CombatFolder.RemoteEvent:FireServer("Right")
+		    end
+		end)
+	end
+})
+
+Tab:AddToggle({
+	Name = "Weight Lifter",
+	Default = false,
+	Callback = function(Value)
+		autoCollect = Value
+		task.spawn(function()
+			while autoCollect do task.wait()
+			    game.ReplicatedStorage.Events.Weight:FireServer(game.Players.LocalPlayer.Data.Weight.Value)
+		    end
+		end)
+	end    
+})
+--[[ Main Tab | END ]]--
+
+--[[ World Tab | START ]]--
+local Tab = Window:MakeTab({
+	Name = "World",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+local Section = Tab:AddSection({
+	Name = "Gravitational Pull"
+})
+
+Tab:AddSlider({
+	Name = "Gravity",
+	Min = 0,
+	Max = 1000,
+	Default = workspace.Gravity,
+	Color = Color3.fromRGB(255,255,255),
+	Increment = 10,
+	ValueName = "Power",
+	Callback = function(grav)
+		workspace.Gravity = grav
+	end    
+})
+
+Tab:AddSlider({
+	Name = "FieldOfView",
+	Min = 0,
+	Max = 170,
+	Default = workspace.Camera.DiagonalFieldOfView,
+	Color = Color3.fromRGB(255,255,255),
+	Increment = 5,
+	ValueName = "View Angle",
+	Callback = function(view)
+		workspace.Camera.DiagonalFieldOfView = view
+	end    
+})
+--[[ World Tab | END ]]--
+
+--[[ Player Tab | START ]]--
+local Tab = Window:MakeTab({
+	Name = "Player",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+local Section = Tab:AddSection({
+	Name = "Movement"
+})
+
+Tab:AddSlider({
+	Name = "WalkSpeed",
+	Min = 0,
+	Max = 100,
+	Default = game.Players.LocalPlayer.Character.Humanoid.WalkSpeed,
+	Color = Color3.fromRGB(255,255,255),
+	Increment = 4,
+	ValueName = "Speed",
+	Callback = function(walk)
+		game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = walk
+	end    
+})
+
+Tab:AddSlider({
+	Name = "JumpHeight",
+	Min = 0,
+	Max = 500,
+	Default = game.Players.LocalPlayer.Character.Humanoid.JumpPower,
+	Color = Color3.fromRGB(255,255,255),
+	Increment = 4,
+	ValueName = "Height",
+	Callback = function(jump)
+		game.Players.LocalPlayer.Character.Humanoid.JumpHeight = jump
+	end    
+})
+
+Tab:AddButton({
+	Name = "Anti Idle",
+	Callback = function()
+		game.Players.LocalPlayer.Idled:connect(function()
+			local Cam = workspace.CurrentCamera.CFrame
+			local virtualUser = game.VirtualUser
+			virtualUser:Button2Down(Vector2.new(0,0), Cam) task.wait(1)
+			virtualUser:Button2Up(Vector2.new(0,0), Cam.CFrame)
+		end)
+	end   
+})
+--[[ Player Tab | END ]]--
+
+OrionLib:Init()
