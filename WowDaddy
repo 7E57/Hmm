@@ -1,5 +1,5 @@
 local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
-local Window = OrionLib:MakeWindow({Name = "Raise a Yippee", HidePremium = false, SaveConfig = true, ConfigFolder = "yippee"})
+local Window = OrionLib:MakeWindow({Name = "Wow Daddy", HidePremium = false, SaveConfig = true, ConfigFolder = "weight"})
 
 --[[ Main Tab | START ]]--
 local Tab = Window:MakeTab({
