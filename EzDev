@@ -15,7 +15,7 @@ Tab:AddToggle({
 		autoClicker = Value
 		task.spawn(function()
 			while autoClicker do task.wait()
-				game.ReplicatedStorage.ZiNoy.Apps.TestSignal:FireServer(workspace.PLOTS.Plot3, "Test Signal")
+				game.ReplicatedStorage.ZiNoy.Apps.TestSignal:FireServer(workspace.PLOTS.Plot3, "Ping 2.0")
 		    end
 		end)
 	end
