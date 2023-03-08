@@ -33,6 +33,9 @@ TextButton.AutoButtonColor = false
 TextButton.Font = Enum.Font.SourceSans
 TextButton.TextColor3 = Color3.fromRGB(0, 0, 0)
 TextButton.TextTransparency = 1.000
+TextButton.Draggable = true
+TextButton.Active = true
+
 
 UICorner.CornerRadius = UDim.new(0.25, 0)
 UICorner.Parent = TextButton
