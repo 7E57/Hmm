@@ -20,12 +20,12 @@ Frame_2.Parent = Frame
 Frame_2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 Frame_2.BackgroundTransparency = 1.000
 Frame_2.LayoutOrder = 1
-Frame_2.Position = UDim2.new(0.5, -86, 0, -32)
+Frame_2.Position = UDim2.new(0.5, -90, 0, -32)
 Frame_2.Size = UDim2.new(0, 86, 0, 32)
 
 TextButton.Parent = Frame_2
 TextButton.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-TextButton.BackgroundTransparency = 0.600
+TextButton.BackgroundTransparency = 0.500
 TextButton.Position = UDim2.new(0, 0, 0, 0)
 TextButton.Size = UDim2.new(2.174, 0, 1, 0)
 TextButton.ZIndex = 10
