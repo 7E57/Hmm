@@ -1,0 +1,131 @@
+local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
+local Window = OrionLib:MakeWindow({Name = "RPG Simulator", HidePremium = false, SaveConfig = true, ConfigFolder = "RPG_Sim"})
+
+--[[ Main Tab | START ]]--
+local Tab = Window:MakeTab({
+	Name = "Main",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+local Section = Tab:AddSection({
+	Name = "Auto Attack"
+})
+
+Tab:AddToggle({
+	Name = "Slash - LMB",
+	Default = false,
+	Callback = function(Value)
+		autoSlash = Value
+		task.spawn(function()
+			while autoSlash do
+				game:GetService("ReplicatedStorage").Events:WaitForChild("attack"):FireServer("Slash")
+		    	task.wait(0.11)
+		    end
+		end)
+	end    
+})
+
+Tab:AddToggle({
+	Name = "Skill - Q",
+	Default = false,
+	Callback = function(Value)
+		autoSkillOne = Value
+		task.spawn(function()
+			while autoSkillOne do
+				repeat wait() until game:GetService("Players").LocalPlayer.Stats.Skill1.canAttack.Value == true task.wait()
+				game:GetService("ReplicatedStorage").Events:WaitForChild("attack"):FireServer("Skill", "Skill1", "Attack")
+				task.wait()
+		    end
+		end)
+	end
+})
+
+Tab:AddToggle({
+	Name = "Skill - E",
+	Default = false,
+	Callback = function(Value)
+		autoSkillTwo = Value
+		task.spawn(function()
+			while autoSkillTwo do
+				repeat wait() until game:GetService("Players").LocalPlayer.Stats.Skill2.canAttack.Value == true task.wait()
+				game:GetService("ReplicatedStorage").Events:WaitForChild("attack"):FireServer("Skill", "Skill2", "Attack")
+				task.wait()
+		    end
+		end)
+	end
+})
+
+Tab:AddToggle({
+	Name = "Skill - R",
+	Default = false,
+	Callback = function(Value)
+		autoSkillThree = Value
+		task.spawn(function()
+			while autoSkillThree do
+				repeat wait() until game:GetService("Players").LocalPlayer.Stats.Skill3.canAttack.Value == true task.wait()
+				game:GetService("ReplicatedStorage").Events:WaitForChild("attack"):FireServer("Skill", "Skill3", "Attack")
+				task.wait()
+		    end
+		end)
+	end
+})
+
+local Section = Tab:AddSection({
+	Name = "Useful"
+})
+
+Tab:AddDropdown({
+	Name = "World 1 - Teleport",
+	Default = "1",
+	Options = {"Zone1Teleport", "Zone2Teleport", "Zone3Teleport", "Zone4Teleport", "Zone5Teleport", "Zone6Teleport", "Zone7Teleport", "Zone8Teleport", "Zone9Teleport", "Zone10Teleport", "Zone11Teleport"},
+	Callback = function(worldOne)
+		game.Players.LocalPlayer.Character:MoveTo(workspace.ZoneTeleporters[worldOne].Position)
+	end    
+})
+
+Tab:AddDropdown({
+	Name = "World 2 - Teleport",
+	Default = "1",
+	Options = {"Zone1Teleport", "Zone2Teleport", "Zone3Teleport", "Zone4Teleport", "Zone5Teleport", "Zone6Teleport", "Zone7Teleport", "Zone11Teleport"},
+	Callback = function(worldTwo)
+		game.Players.LocalPlayer.Character:MoveTo(workspace.ZoneTeleporters[worldTwo].Position)
+	end    
+})
+
+Tab:AddToggle({
+	Name = "Drink All Pots",
+	Default = false,
+	Callback = function(Value)
+		drinkAllPots = Value
+		task.spawn(function()
+			while drinkAllPots do
+				game:GetService("ReplicatedStorage").Events:WaitForChild("drink"):FireServer()
+				task.wait(60) -- No need to rush drinking pots
+		    end
+		end)
+	end
+})
+--[[ Main Tab | END ]]--
+
+--[[ Player Tab | START ]]--
+local Tab = Window:MakeTab({
+	Name = "Player",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+Tab:AddButton({
+	Name = "Anti Idle",
+	Callback = function()
+		game.Players.LocalPlayer.Idled:connect(function()
+			local Cam = workspace.CurrentCamera.CFrame
+			local virtualUser = game.VirtualUser
+			virtualUser:Button2Down(Vector2.new(0,0), Cam) task.wait(1)
+			virtualUser:Button2Up(Vector2.new(0,0), Cam.CFrame)
+		end)
+	end   
+})
+--[[ Player Tab | END ]]--
+
+OrionLib:Init()
