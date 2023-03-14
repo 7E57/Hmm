@@ -80,7 +80,7 @@ Tab:AddDropdown({
 	Default = "1",
 	Options = {"Zone1Teleport", "Zone2Teleport", "Zone3Teleport", "Zone4Teleport", "Zone5Teleport", "Zone6Teleport", "Zone7Teleport", "Zone8Teleport", "Zone9Teleport", "Zone10Teleport", "Zone11Teleport"},
 	Callback = function(worldOne)
-		game.Players.LocalPlayer.Character:MoveTo(workspace.ZoneTeleporters[worldOne].Position)
+		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = workspace.ZoneTeleporters[worldOne].CFrame
 	end    
 })
 
@@ -105,6 +105,42 @@ Tab:AddToggle({
 		    end
 		end)
 	end
+})
+
+local Section = Tab:AddSection({
+	Name = "Experimental"
+})
+
+Tab:AddButton({
+	Name = "Walk to Boss - Zone 9, World 1 ONLY ADDED",
+	Callback = function()
+		local serv = game:GetService("PathfindingService")
+		local human = game.Players.LocalPlayer.Character.Humanoid
+		local body = game.Players.LocalPlayer.Character.HumanoidRootPart
+		local dest = workspace.Mobs["Shekbrr Tomb Protector"].HumanoidRootPart -- Change PartNameHere
+		local path = serv:CreatePath()
+		path:ComputeAsync(body.Position,dest.Position)
+		if path.Status == Enum.PathStatus.Success then
+			local wayPoints = path:GetWaypoints()
+			for i = 1,#wayPoints do
+				local point = wayPoints[i]
+				human:MoveTo(point.Position)
+				local success = human.MoveToFinished:Wait()
+				if point.Action == Enum.PathWaypointAction.Jump then
+					human.WalkSpeed = 0 task.wait(0.2)
+					human.WalkSpeed = 16
+					human.Jump = true
+				end
+				if not success then
+					human.Jump = true
+					human:MoveTo(point.Position)
+					if not human.MoveToFinished:Wait() then
+						break
+					end
+				end
+			end
+		end
+	end   
 })
 --[[ Main Tab | END ]]--
 
