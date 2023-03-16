@@ -1,0 +1,139 @@
+repeat wait() until game:IsLoaded() and game.Players and game.Players.LocalPlayer and game.Players.LocalPlayer.Character
+
+if game.PlaceId == 4660023857 then 
+
+	game:GetService("Players").LocalPlayer.PlayerGui.LoadingScreen:Destroy()
+
+	task.wait(10)
+
+	local serv = game:GetService("PathfindingService")
+	local user = game:GetService("Players").LocalPlayer
+	local human = game:GetService("Players").LocalPlayer.Character.Humanoid
+	local body = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart
+	local dest = game:GetService("Workspace").Mobs
+	local event = game:GetService("ReplicatedStorage").Events
+	local path = serv:CreatePath()
+
+	-- First Boss
+	path:ComputeAsync(body.Position,dest.Kralos.HumanoidRootPart.Position)
+	if path.Status == Enum.PathStatus.Success then
+		local wayPoints = path:GetWaypoints()
+		for i = 1,#wayPoints do
+			local point = wayPoints[i]
+			human:MoveTo(point.Position)
+			local success = human.MoveToFinished:Wait()
+			if point.Action == Enum.PathWaypointAction.Jump then
+				human.WalkSpeed = 0
+				wait(0.2)
+				human.WalkSpeed = 16
+				human.Jump = true
+			end
+			if not success then
+				human.Jump = true
+				human:MoveTo(point.Position)
+				if not human.MoveToFinished:Wait() then
+					break
+				end
+			end
+		end
+	end
+
+	repeat wait() until user.Stats.Skill3.canAttack.Value == true 
+	task.wait() event:WaitForChild("attack"):FireServer("Skill", "Skill3", "Attack")
+	task.wait(0.11)
+	repeat wait() until user.Stats.Skill2.canAttack.Value == true
+	task.wait() event:WaitForChild("attack"):FireServer("Skill", "Skill2", "Attack")
+	task.wait(0.11)
+	repeat wait() until user.Stats.Skill1.canAttack.Value == true
+	task.wait() event:WaitForChild("attack"):FireServer("Skill", "Skill1", "Attack")
+
+	task.wait(3)
+
+	for _,v in pairs(workspace.Room1["Teleporter_"]:GetDescendants()) do
+		if v:IsA("TouchTransmitter") then
+			firetouchinterest(body, v.Parent, 0) task.wait()
+			firetouchinterest(body, v.Parent, 1)
+		end
+	end
+
+	task.wait(3)
+
+	-- Second Boss
+	path:ComputeAsync(body.Position,dest.Zetrox.HumanoidRootPart.Position)
+	if path.Status == Enum.PathStatus.Success then
+		local wayPoints = path:GetWaypoints()
+		for i = 1,#wayPoints do
+			local point = wayPoints[i]
+			human:MoveTo(point.Position)
+			local success = human.MoveToFinished:Wait()
+			if point.Action == Enum.PathWaypointAction.Jump then
+				human.WalkSpeed = 0
+				wait(0.2)
+				human.WalkSpeed = 16
+				human.Jump = true
+			end
+			if not success then
+				human.Jump = true
+				human:MoveTo(point.Position)
+				if not human.MoveToFinished:Wait() then
+					break
+				end
+			end
+		end
+	end
+
+	repeat wait() until user.Stats.Skill3.canAttack.Value == true 
+	task.wait() event:WaitForChild("attack"):FireServer("Skill", "Skill3", "Attack")
+	task.wait(0.11)
+	repeat wait() until user.Stats.Skill2.canAttack.Value == true
+	task.wait() event:WaitForChild("attack"):FireServer("Skill", "Skill2", "Attack")
+	task.wait(0.11)
+	repeat wait() until user.Stats.Skill1.canAttack.Value == true
+	task.wait() event:WaitForChild("attack"):FireServer("Skill", "Skill1", "Attack")
+
+	task.wait(3)
+
+	for _,v in pairs(workspace.Room2["Teleporter_"]:GetDescendants()) do
+		if v:IsA("TouchTransmitter") then
+			firetouchinterest(body, v.Parent, 0) task.wait()
+			firetouchinterest(body, v.Parent, 1)
+		end
+	end
+
+	task.wait(3)
+
+	-- Third Boss
+	path:ComputeAsync(body.Position,dest.Shade.HumanoidRootPart.Position)
+	if path.Status == Enum.PathStatus.Success then
+		local wayPoints = path:GetWaypoints()
+		for i = 1,#wayPoints do
+			local point = wayPoints[i]
+			human:MoveTo(point.Position)
+			local success = human.MoveToFinished:Wait()
+			if point.Action == Enum.PathWaypointAction.Jump then
+				human.WalkSpeed = 0
+				wait(0.2)
+				human.WalkSpeed = 16
+				human.Jump = true
+			end
+			if not success then
+				human.Jump = true
+				human:MoveTo(point.Position)
+				if not human.MoveToFinished:Wait() then
+					break
+				end
+			end
+		end
+	end
+
+	repeat wait() until user.Stats.Skill3.canAttack.Value == true 
+	task.wait() event:WaitForChild("attack"):FireServer("Skill", "Skill3", "Attack")
+	task.wait(0.11)
+	repeat wait() until user.Stats.Skill2.canAttack.Value == true
+	task.wait() event:WaitForChild("attack"):FireServer("Skill", "Skill2", "Attack")
+	task.wait(0.11)
+	repeat wait() until user.Stats.Skill1.canAttack.Value == true
+	task.wait() event:WaitForChild("attack"):FireServer("Skill", "Skill1", "Attack")
+	
+end
+-- THE END
