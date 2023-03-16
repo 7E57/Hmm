@@ -3,6 +3,13 @@ repeat wait() until game:IsLoaded() and game.Players and game.Players.LocalPlaye
 if game.PlaceId == 4660023857 then
 
 	game:GetService("Players").LocalPlayer.PlayerGui.LoadingScreen:Destroy()
+		
+	game.Players.LocalPlayer.Idled:connect(function()
+		local Cam = workspace.CurrentCamera.CFrame
+		local virtualUser = game.VirtualUser
+		virtualUser:Button2Down(Vector2.new(0,0), Cam) task.wait(1)
+		virtualUser:Button2Up(Vector2.new(0,0), Cam.CFrame)
+	end)
 
 	task.wait(10)
 
