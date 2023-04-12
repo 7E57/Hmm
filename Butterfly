@@ -1,0 +1,26 @@
+local function ScanRigType(player)
+    if player and player.Character and player.Character.Humanoid.RigType == Enum.HumanoidRigType.R6 then
+        return true -- Return 'true' if R6
+    end
+    return false -- Return 'false' if R15
+end
+
+
+local player = game:GetService('Players').LocalPlayer
+if ScanRigType(player) then -- If R6
+	Body = game:GetService("Players").LocalPlayer.Character
+
+	Body["Right Arm"]:Destroy()
+	Body["Left Leg"]:Destroy()
+
+	Body["Right Leg"]:Destroy()
+	Body["Left Leg"]:Destroy()
+else -- If R15
+	Body = game:GetService("Players").LocalPlayer.Character
+
+	Body.RightUpperArm:Destroy()
+	Body.LeftUpperArm:Destroy()
+
+	Body.RightUpperLeg:Destroy()
+	Body.LeftUpperLeg:Destroy()
+end
