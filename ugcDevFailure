@@ -1,0 +1,14 @@
+_G.autoCollect = true
+while _G.autoCollect do task.wait()
+    for i,v in pairs(game:GetService("Workspace").Plots:GetChildren()) do
+        if v.Info.Player.Value == game:GetService("Players").LocalPlayer then
+            for _,r in pairs(game:GetService("Workspace").Plots[tostring(v)].Roaches:GetChildren()) do -- Find your Plot
+                if r:IsA("Part") then
+                    r.Position = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position -- Auto Collects Roaches
+                    task.wait() game:GetService("ReplicatedStorage").Events.FinishObby:FireServer() -- Auto Finish Obby
+                    task.wait() game:GetService("ReplicatedStorage").Events.Upload:FireServer() -- Auto Upload Roaches
+                end
+            end
+        end
+    end
+end
