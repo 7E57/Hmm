@@ -1,0 +1,36 @@
+-- Decompiled by Electron BETA [ Made By (Co) ]
+-- Path: StarterGui.MainGui.NumberScript
+local L_EnterNumber_1 = game:GetService("ReplicatedStorage"):WaitForChild("EnterNumber")
+local L_LimitedName_2 = game:GetService("ReplicatedStorage"):WaitForChild("LimitedName")
+local L_NumberBox_3 = script.Parent:WaitForChild("NumberBox")
+local L_NotificationFrame_4 = script.Parent:WaitForChild("NotificationFrame")
+local L_Template_5 = L_NotificationFrame_4:WaitForChild("Template")
+local L_Sounds_6 = workspace:WaitForChild("Sounds")
+local S_SoundService_7 = game:GetService("SoundService")
+script.Parent:WaitForChild("EnterButton").MouseButton1Click:Connect((function()
+if L_NumberBox_3.Text ~= "" then
+if tonumber(L_NumberBox_3.Text) then
+if L_EnterNumber_1:InvokeServer(L_NumberBox_3.Text) == "You guessed the number!" then
+L_NumberBox_3.PlaceholderColor3 = Color3.fromRGB(0, 255, 0)
+end
+L_NumberBox_3.PlaceholderColor3 = Color3.fromRGB(255, 0, 0)
+S_SoundService_7:PlayLocalSound(L_Sounds_6:GetChildren()[math.random(1, #L_Sounds_6:GetChildren())])
+if L_EnterNumber_1:InvokeServer(L_NumberBox_3.Text) ~= nil then
+L_NumberBox_3.PlaceholderText = L_EnterNumber_1:InvokeServer(L_NumberBox_3.Text)
+end
+L_NumberBox_3.Text = ""
+wait(1.75)
+L_NumberBox_3.PlaceholderText = "Enter number..."
+L_NumberBox_3.PlaceholderColor3 = Color3.fromRGB(178, 178, 178)
+end
+end
+end))
+game:GetService("ReplicatedStorage"):WaitForChild("WinnerMessage").OnClientEvent:Connect((function(a1, a2)
+local v1 = L_Template_5:Clone()
+v1.Name = a1
+v1.Text = a1 .. " won the " .. L_LimitedName_2.Value .. "! [Number: " .. a2 .. "]"
+v1.Parent = L_NotificationFrame_4
+v1.Visible = true
+wait(3)
+v1:Destroy()
+end))
