@@ -1,0 +1,79 @@
+local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
+
+local Window = OrionLib:MakeWindow({Name = "Wasteland Tycoon | Helper", HidePremium = true, SaveConfig = false, IntroEnabled = false})
+
+local Tab = Window:MakeTab({
+	Name = "Teleports",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+local Section = Tab:AddSection({
+	Name = "Bandit Villages"
+})
+
+OrionLib:MakeNotification({
+	Name = "Title!",
+	Content = "Notification content... what will it say??",
+	Image = "rbxassetid://4483345998",
+	Time = 5
+})
+
+Tab:AddButton({
+	Name = "Lumberyard",
+	Callback = function()
+        local targetCFrame = CFrame.new(-621.168518, 42.8995628, 730.807739, -0.258864403, 0, -0.965913713, 0, 1, 0, 0.965913713, 0, -0.258864403)
+        local epsilon = 0.001
+        
+        local targetPosition = targetCFrame.Position
+        local player = game.Players.LocalPlayer
+        local playerPosition = player.Character and player.Character:FindFirstChild("HumanoidRootPart") and player.Character.HumanoidRootPart.Position
+
+        if playerPosition and (playerPosition - targetPosition).magnitude < epsilon then
+            return
+        else
+            player.Character:MoveTo(targetPosition)
+        end
+
+  	end    
+})
+
+Tab:AddButton({
+	Name = "Church",
+	Callback = function()
+        local targetCFrame = CFrame.new(-438.694519, 72.1630859, -352.445862, -2.05039978e-05, -0.499938965, -0.866060615, -1, 2.05039978e-05, 1.18613243e-05, 1.18613243e-05, 0.866060615, -0.499938965)
+        local epsilon = 0.001
+
+        local targetPosition = targetCFrame.Position
+        local player = game.Players.LocalPlayer
+        local playerPosition = player.Character and player.Character:FindFirstChild("HumanoidRootPart") and player.Character.HumanoidRootPart.Position
+
+        if playerPosition and (playerPosition - targetPosition).magnitude < epsilon then
+            return
+        else
+            player.Character:MoveTo(targetPosition)
+        end
+
+    end    
+})
+
+Tab:AddButton({
+	Name = "Village",
+	Callback = function()
+        local targetCFrame = CFrame.new(541.532227, 40.5009842, 167.441574, -1.00135803e-05, 0.342006564, -0.939697623, -1, -1.00135803e-05, 7.00354576e-06, -7.00354576e-06, 0.939697623, 0.342006564)
+        local epsilon = 0.001
+
+        local targetPosition = targetCFrame.Position
+        local player = game.Players.LocalPlayer
+        local playerPosition = player.Character and player.Character:FindFirstChild("HumanoidRootPart") and player.Character.HumanoidRootPart.Position
+
+        if playerPosition and (playerPosition - targetPosition).magnitude < epsilon then
+            return
+        else
+            player.Character:MoveTo(targetPosition)
+        end
+
+  	end    
+})
+
+OrionLib:Init()
